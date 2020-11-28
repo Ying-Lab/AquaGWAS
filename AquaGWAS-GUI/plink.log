@@ -1,0 +1,12 @@
+PLINK v1.90b3.31 64-bit (3 Feb 2016)
+Options in effect:
+  --helpj
+
+Hostname: ubuntu-vm
+Working directory: /home/dengchao/Documents/code/AquaGWAS
+Start time: Wed Oct  7 14:49:04 2020
+
+Error: Unrecognized flag ('--helpj').
+For more information, try 'plink --help [flag name]' or 'plink --help | more'.
+
+End time: Wed Oct  7 14:49:04 2020

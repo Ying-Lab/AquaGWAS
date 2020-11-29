@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 //                       << ",,\"Description_"+curLineList[0] << "\"" << endl;
 //    }
 
-    FuncAnnotator funcAnnotator;
+//    FuncAnnotator funcAnnotator;
 //    funcAnnotator.complExoSnpInfo("/media/dengchao/data/data/function_annotation/tmp_pos",
 //                                  "/media/dengchao/data/data/function_annotation/snp_anno.exonic_variant_function",
 //                                  "/media/dengchao/data/data/function_annotation/exonic_pos");
@@ -121,6 +121,9 @@ int main(int argc, char *argv[])
 //                                    "/media/dengchao/data/data/function_annotation/non_exonic_pos",
 //                                    "/media/dengchao/data/data/Funcional_anno/Hdhv3_changeID_annotation.ncbi.csv",
 //                                    "/media/dengchao/data/data/Funcional_anno/func_anno_res");
+
+//    FileReader fileReader;
+//    fileReader.completeTfamFromPheno("/mnt/my_share/dchao/data/test_data/test_data/phenotmp.txt", "/mnt/my_share/dchao/data/test_data/test_data/test.tfam");
 
     MainWindow w;
     w.show();

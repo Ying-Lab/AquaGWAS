@@ -1189,6 +1189,7 @@ bool MainWindow::callEmmaxGwas(QString phenotype, QString genotype, QString map,
         {
             return false;
         }
+        fileReader->completeTfamFromPheno(phenotype, transposeFile+".tfam");
         transformFileFlag = true;
     }
     if (genotype.split(".")[genotype.split(".").length()-1] == "ped")  // Transform "plink" to "transpose"

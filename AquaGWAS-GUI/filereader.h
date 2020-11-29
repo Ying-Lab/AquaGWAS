@@ -26,6 +26,7 @@ public:
     bool transformCovariateFile(QString srcCovar, QString desCovar);
     bool makeAvinputAndSnpposFile(QString vcfFilePath, QString pvalFilePath,
                                   QString avinputFilePath, QString snpPosFilePath);
+    bool completeTfamFromPheno(QString phenoFilePath, QString tfamFilePath);
     bool isNumber(QString str);
 private:
     QString phenotypeFile;

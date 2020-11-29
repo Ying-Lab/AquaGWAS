@@ -216,3 +216,62 @@ bool FileReader::isNumber(QString str)
     }
     return true;
 }
+
+/**
+ * @brief FileReader::completeTfamFromPheno
+ *          Modify tfam, ensure the FID and IID same as phenotype file.
+ * @param phenoFilePath:    FID IID PHE
+ * @param tfamFilePath: FID IID else
+ * @return
+ */
+bool FileReader::completeTfamFromPheno(QString phenoFilePath, QString tfamFilePath)
+{
+    if (phenoFilePath.isNull() || tfamFilePath.isNull())
+    {
+        return false;
+    }
+
+    QFile phenoFile(phenoFilePath);
+    QFile tfamFile(tfamFilePath);
+
+    if (!phenoFile.open(QIODevice::ReadOnly) ||
+        !tfamFile.open(QIODevice::ReadOnly))
+    {
+        return false;
+    }
+
+    QString tmpTfamFilePath = tfamFilePath+".tmp";
+    QFile tmpTfamFile(tmpTfamFilePath);
+    if (!tmpTfamFile.open(QIODevice::WriteOnly))
+    {
+        return false;
+    }
+
+    QTextStream phenoFileStream(&phenoFile);
+    QTextStream tfamFileStream(&tfamFile);
+    QTextStream tmpTfamFileStream(&tmpTfamFile);
+
+    while (!phenoFileStream.atEnd() || !tfamFileStream.atEnd())
+    {
+        QStringList phenoCurLineList = phenoFileStream.readLine().split(QRegExp("\\s+"), QString::SkipEmptyParts);
+        QStringList tfamCurLineList = tfamFileStream.readLine().split(QRegExp("\\s+"), QString::SkipEmptyParts);
+
+        if (phenoCurLineList[1] != tfamCurLineList[1])
+        {   // IID don't match
+            return false;
+        }
+
+        tfamCurLineList[0] = phenoCurLineList[0];
+
+        tmpTfamFileStream << tfamCurLineList.join("\t") << endl;
+    }
+
+//    phenoFile.close();
+//    tfamFile.close();
+//    tmpTfamFile.close();
+
+    tfamFile.remove();
+    tmpTfamFile.rename(tfamFilePath);
+
+    return true;
+}

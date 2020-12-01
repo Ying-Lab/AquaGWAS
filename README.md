@@ -18,7 +18,7 @@ Select the appropriate analysis tool and model (plink: liear, logistic; gemma: L
 Three basic parameters respectively are MAF (minor allele frequency)， MIND(SNPs with low genotype calls are removed) and GENO(individual with low genotype calls are removed). "**>>**" can be clicked to set parameters of LD fitering(window size, step length and r2 threshold).
 >4. Select phenotype  
 When the input phenotype data file contains multiple phenotype data, you can select the phenotype to be analyzed in the lower right corner of the interface. AquaGWAS will analyze each phenotype separately.   
-![ASSOC](https://github.com/gdengchao/AquaGWAS/blob/main/resource/assoc.png)
+![ASSOC](https://github.com/gdengchao/AquaGWAS/blob/main/resource/assoc.gif)
 + **MAN/QQ (Manhattan plot and QQ plot)**
 >After association analysis, the p-value file will automatically open, click the "plot" respectively, obtain Manhattan and Quantile-Quantile plot.   
 **Notice:** Make sure R is installed before plotting. If it is not installed, R can be installed using the following commands in Ubuntu:  

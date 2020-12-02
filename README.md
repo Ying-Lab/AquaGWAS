@@ -44,12 +44,16 @@ When the input phenotype data file contains multiple phenotype data, you can sel
 + **ANNOTATION (Structural annotation and functional annotation)**
 > 1. annotaion  
 The module annotation contains structural annotation and fucntional annotation. The input files for  structual anntation are avinput, reference gene and reference sequence. The avinupt is a input file for annovar, the format of avinput:  
-![AVINPUT](https://github.com/gdengchao/AquaGWAS/blob/main/resource/avinput.png)  
+
+<p align="center">
+  <img src="https://github.com/gdengchao/AquaGWAS/blob/main/resource/avinput.png"/>
+</p>
+ 
 The reference gene could be a gtf file or gff file, and reference sequence should be a .fasta file. In addition, you can offer a refGene.txt as reference gene and a refMrna.fa as reference sequence.   
 The input files for functional anntation are snp position and functional annotation reference database. The data of snp position file should be "snp_ID p-val CHR BP" without header. The functional annotation reference database file can be three formats: 1. The first column is "Gene_ID" and the others(can be multiple columns) are description, the suggested file suffix is "funcanno". 2. A database download from NCBI(with suffix "*ncbi.csv"). 3. A database download from ensemble. 
-(We offered "*_refGene.txt", "*refGeneMrna.fa" and funcation annotation databse file of some species)  
-**Notice:** 1. When no input of functional annotation, the functional annotaion won't be executed.  
+(We offered "*_refGene.txt", "*refGeneMrna.fa" and funcation annotation databse file of some species)    
 ![ANNOTATION](https://github.com/gdengchao/AquaGWAS/blob/main/resource/anno.gif)  
+**Notice:** When no input of functional annotation, the functional annotaion won't be executed.
 > 2. step  
 the "avinput" and "snp_pos" file can be generated from a ".vcf"(open in Genotype) and a p-value file of association analysis(open automatically after association analysis). The threshold is used for filtering SNP and getting significant SNP.  
 ![STEP](https://github.com/gdengchao/AquaGWAS/blob/main/resource/anno_step.gif)

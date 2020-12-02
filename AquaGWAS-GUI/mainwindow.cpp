@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
 #ifdef QT_NO_DEBUG
     workDirectory->setOutputDirectory(QDir::currentPath());
 #else
-    workDirectory->setOutputDirectory("/media/dengchao/data/test");
+    workDirectory->setOutputDirectory("/home/yingwang/Desktop/out/");
 #endif
     ui->projectNameLineEdit->setText(workDirectory->getProjectName());
     ui->outdirLineEdit->setText(workDirectory->getOutputDirectory()+"/"+workDirectory->getProjectName());
@@ -1189,7 +1189,6 @@ bool MainWindow::callEmmaxGwas(QString phenotype, QString genotype, QString map,
         {
             return false;
         }
-        fileReader->completeTfamFromPheno(phenotype, transposeFile+".tfam");
         transformFileFlag = true;
     }
     if (genotype.split(".")[genotype.split(".").length()-1] == "ped")  // Transform "plink" to "transpose"
@@ -1231,8 +1230,9 @@ bool MainWindow::callEmmaxGwas(QString phenotype, QString genotype, QString map,
         {
             return false;
         }
+        fileReader->completeTfamFromPheno(phenotype, transposeFile+".tfam");
+        transformFileFlag = true;
     }
-
     Emmax emmax;
     if (kinship.isNull() && emmaxParamWidget->isMakeKinAuto())
     {

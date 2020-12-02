@@ -1770,7 +1770,6 @@ bool CommandLineParser::callEmmaxGwas(QHash<QString, QString> args)
             {
                 return false;
             }
-            fileReader->completeTfamFromPheno(phenotype, transposeFile+".tfam");
             transformFileFlag = true;
         }
         if (genotype.split(".")[genotype.split(".").length()-1] == "ped")  // Transform "plink" to "transpose"
@@ -1817,6 +1816,7 @@ bool CommandLineParser::callEmmaxGwas(QHash<QString, QString> args)
             {
                 throw runtime_error("process cannot be started");
             }
+            fileReader->completeTfamFromPheno(phenotype, transposeFile+".tfam");
             //   i think this place still need to add something!!!
         }
 

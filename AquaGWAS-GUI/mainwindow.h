@@ -135,8 +135,10 @@ private:
     QString toolpath = QCoreApplication::applicationDirPath() + "/tools/";    // Realease
     QString scriptpath = QCoreApplication::applicationDirPath() + "/script/";
 #else
-    QString toolpath = "/home/zhi/Desktop/AquaGWAS-master/code/tools/";
-    QString scriptpath = "/home/zhi/Desktop/AquaGWAS-master/code/script/";
+//    QString toolpath = "/home/zhi/Desktop/AquaGWAS-master/code/tools/";
+//    QString scriptpath = "/home/zhi/Desktop/AquaGWAS-master/code/script/";
+    QString toolpath = "/mnt/my_share/dchao/Aqua/AquaGWAS/AquaGWAS-GUI/tools/";
+    QString scriptpath = "/mnt/my_share/dchao/Aqua/AquaGWAS/AquaGWAS-GUI/script/";
 #endif
     // Basic association parameters.
     FileReader *fileReader;             // Read file, and save the directory.

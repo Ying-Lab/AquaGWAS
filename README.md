@@ -4,7 +4,11 @@
 >1. PROJECT, 2. ASSOC, 3. MAN/QQ, 4. PCA/LD, 5. ANNOTATION
 + **PROJECT (Project setting)**   
 >Select an appropriate output directory and set an easily distinguishable project name to which all AquaGWAS final output will be based.   
-![PROJECT](https://github.com/gdengchao/AquaGWAS/blob/main/resource/project.png)
+
+<p align="center">
+  <img src="https://github.com/gdengchao/AquaGWAS/blob/main/resource/project.png"/>
+</p>
+
 + **ASSOC (Association analysis)**   
 >1. Open input file  
 Click on the left side of the interface to open the required input file.  

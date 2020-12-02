@@ -44,7 +44,7 @@ When the input phenotype data file contains multiple phenotype data, you can sel
 + **ANNOTATION (Structural annotation and functional annotation)**
 > 1. annotaion  
 The module annotation contains structural annotation and fucntional annotation. The input files for  structual anntation are avinput, reference gene and reference sequence. The avinupt is a input file for annovar, the format of avinput:  
-![AVINPUT](https://github.com/gdengchao/AquaGWAS/blob/main/resource/avinput.gif)  
+![AVINPUT](https://github.com/gdengchao/AquaGWAS/blob/main/resource/avinput.png)  
 The reference gene could be a gtf file or gff file, and reference sequence should be a .fasta file. In addition, you can offer a refGene.txt as reference gene and a refMrna.fa as reference sequence.   
 The input files for functional anntation are snp position and functional annotation reference database. The data of snp position file should be "snp_ID p-val CHR BP" without header. The functional annotation reference database file can be three formats: 1. The first column is "Gene_ID" and the others(can be multiple columns) are description, the suggested file suffix is "funcanno". 2. A database download from NCBI(with suffix "*ncbi.csv"). 3. A database download from ensemble. 
 (We offered "*_refGene.txt", "*refGeneMrna.fa" and funcation annotation databse file of some species)  

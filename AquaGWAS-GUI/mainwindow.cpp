@@ -148,7 +148,7 @@ void MainWindow::cmdGWASButton_clicked()
     }
 
     this->runningFlag = true;
-  //  ui->runGwasButton->setDisabled(true);
+    //  ui->runGwasButton->setDisabled(true);
     qApp->processEvents();
 
 
@@ -156,7 +156,7 @@ void MainWindow::cmdGWASButton_clicked()
     QString maf = ui->mafRadioButton->isChecked()? ui->mafDoubleSpinBox->text():nullptr;
     QString mind = ui->mindRadioButton->isChecked()? ui->mindDoubleSpinBox->text():nullptr;
     QString geno = ui->genoRadioButton->isChecked()? ui->genoDoubleSpinBox->text():nullptr;
-  //manhattan plot
+    //manhattan plot
     QString gwBase =  ui->gwBaseLineEdit->text();
     QString gwExpo = ui->gwExpoLineEdit->text();
     QString sgBase = ui->sgBaseLineEdit->text();
@@ -166,47 +166,22 @@ void MainWindow::cmdGWASButton_clicked()
     if(tool=="gemma")
     {
         QMap<QString, QString> moreParam = this->gemmaParamWidget->getCurrentParam();
-      //  QString cmdlist;
+        //  QString cmdlist;
 
-         cmdlist.append("-A -T "+tool+" -M "+model+" --name "+name+" -p "+phenotype+" --kinmatrix_gemma "+moreParam["kinmatrix"]
-                               +" -g "+genotype+" -o "+out);
-         if(model=="LMM")
-         {
-             cmdlist.append(" --lmmtest " +moreParam["lmmtest"]);
-         }
-         if(model=="BSLMM")
-         {
-             cmdlist.append(" --bslmmmodel " +moreParam["bslmmmodel"]);
-         }
+        cmdlist.append("-A -T "+tool+" -M "+model+" --name "+name+" -p "+phenotype+" --kinmatrix_gemma "+moreParam["kinmatrix"]
+                +" -g "+genotype+" -o "+out);
+        if(model=="LMM")
+        {
+            cmdlist.append(" --lmmtest " +moreParam["lmmtest"]);
+        }
+        if(model=="BSLMM")
+        {
+            cmdlist.append(" --bslmmmodel " +moreParam["bslmmmodel"]);
+        }
 
-         if (!maf.isNull())
-         {
-              cmdlist.append(" --maf "+maf);
-         }
-         if (!mind.isNull())
-         {
-
-             cmdlist.append(" --mind "+mind);
-         }
-         if (!geno.isNull())
-         {
-
-              cmdlist.append(" --geno "+geno);
-         }
-
-       //  emit runningMsgWidgetAppendText(cmdlist);
-
-
-    }
-    if(tool=="plink")
-    {
-      //  QString cmdlist;
-        cmdlist.append("-A -T "+tool+" -M "+model+" --name "+name
-                       +" -p "+phenotype
-             +" -g "+genotype+" -o "+out);
         if (!maf.isNull())
         {
-             cmdlist.append(" --maf "+maf);
+            cmdlist.append(" --maf "+maf);
         }
         if (!mind.isNull())
         {
@@ -216,200 +191,225 @@ void MainWindow::cmdGWASButton_clicked()
         if (!geno.isNull())
         {
 
-             cmdlist.append(" --geno "+geno);
+            cmdlist.append(" --geno "+geno);
         }
 
-       // emit runningMsgWidgetAppendText(cmdlist);
+        //  emit runningMsgWidgetAppendText(cmdlist);
+
+
+    }
+    if(tool=="plink")
+    {
+        //  QString cmdlist;
+        cmdlist.append("-A -T "+tool+" -M "+model+" --name "+name
+                       +" -p "+phenotype
+                       +" -g "+genotype+" -o "+out);
+        if (!maf.isNull())
+        {
+            cmdlist.append(" --maf "+maf);
+        }
+        if (!mind.isNull())
+        {
+
+            cmdlist.append(" --mind "+mind);
+        }
+        if (!geno.isNull())
+        {
+
+            cmdlist.append(" --geno "+geno);
+        }
+
+        // emit runningMsgWidgetAppendText(cmdlist);
 
 
     }
     if(tool=="emmax")
     {
 
-         QMap<QString, QString> moreParam = this->emmaxParamWidget->getCurrentParam();
-      //  QString cmdlist;
-       cmdlist.append("-A -T "+tool+" --name "+name+" -M "+model+" -p "+phenotype
-                      +" -g "+genotype+" -o "+out+" --kinmatrix_emmax "+moreParam["kinmatrix"]);
-       if(!kinship.isNull())
-       {
-           cmdlist.append(" -k "+kinship);
-       }
-       if (!maf.isNull())
-       {
+        QMap<QString, QString> moreParam = this->emmaxParamWidget->getCurrentParam();
+        //  QString cmdlist;
+        cmdlist.append("-A -T "+tool+" --name "+name+" -M "+model+" -p "+phenotype
+                       +" -g "+genotype+" -o "+out+" --kinmatrix_emmax "+moreParam["kinmatrix"]);
+        if(!kinship.isNull())
+        {
+            cmdlist.append(" -k "+kinship);
+        }
+        if (!maf.isNull())
+        {
             cmdlist.append(" --maf "+maf);
-       }
-       if (!mind.isNull())
-       {
+        }
+        if (!mind.isNull())
+        {
 
-           cmdlist.append(" --mind "+mind);
-       }
-       if (!geno.isNull())
-       {
+            cmdlist.append(" --mind "+mind);
+        }
+        if (!geno.isNull())
+        {
 
             cmdlist.append(" --geno "+geno);
-       }
+        }
 
 
 
-     // emit runningMsgWidgetAppendText(cmdlist);
+        // emit runningMsgWidgetAppendText(cmdlist);
 
     }
     cmdlist.append(" --gwBase "+gwBase+" --gwExpo "+gwExpo+" --sgBase "+sgBase+" --sgExpo "+sgExpo);
-     emit runningMsgWidgetAppendText(cmdlist);
-// -A -T emmax --name pro2 -M EMMA -p /home/zhi/Desktop/data_renhao/sex.phe -g /home/zhi/Desktop/data_renhao/y2.tped
-// -k /home/zhi/Desktop/data_renhao/y2.hBN.kinf  --kinmatrix_emmax BN -o /home/zhi/Desktop/out
-
-      this->runningFlag = false;
-}
-
- void MainWindow::pca_ld_cmdButton_clicked()
- {
-
-     if (this->runningFlag)
-     {
-         QMessageBox::information(nullptr, "Error", "A project is running now.");
-         return;
-     }
-     if (this->fileReader->getGenotypeFile().isNull() || this->fileReader->getGenotypeFile().isEmpty())
-     {
-         QMessageBox::information(nullptr, "Error", "A genotype file is necessary!   ");
-         return;
-     }
-
-     this->runningFlag = true;
- //    ui->pcaRunPushButton->setEnabled(false);
-     qApp->processEvents();
-
-     QString genotype = this->fileReader->getGenotypeFile();
-
-     QString map = this->fileReader->getMapFile();
-     QString out = this->workDirectory->getOutputDirectory();
-     QString name = this->workDirectory->getProjectName();
-     QString PCs =QString(ui->nPCsLineEdit->text());
-     QString Threads= QString(ui->nThreadsLineEdit->text());
-
-     QString PCAcmdlist;
-     PCAcmdlist.append("--pca ");
-     PCAcmdlist.append("--name "+name);
-     PCAcmdlist.append(" -g "+genotype+" --PCs "+PCs+" --threads "+Threads+" -o "+out);
-     emit runningMsgWidgetAppendText("PCA:");
-     emit runningMsgWidgetAppendText(PCAcmdlist);
-     emit runningMsgWidgetAppendText("");
-     emit runningMsgWidgetAppendText("");
-     emit runningMsgWidgetAppendText("");
-     emit runningMsgWidgetAppendText("");
-
-     QString LDcmdlist;
-     LDcmdlist.append("--LD ");
-     LDcmdlist.append("-g "+genotype+" --name "+name+" -o "+out+" --LDplot yes ");
-     if(ui->yesLDByFamRadioButton->isChecked())
-     {
-         LDcmdlist.append("--analysis yes");
-     }
-     else
-     {
-         LDcmdlist.append("--analysis no");
-     }
-     emit runningMsgWidgetAppendText("LD:");
-     emit runningMsgWidgetAppendText(LDcmdlist);
+    emit runningMsgWidgetAppendText(cmdlist);
+    // -A -T emmax --name pro2 -M EMMA -p /home/zhi/Desktop/data_renhao/sex.phe -g /home/zhi/Desktop/data_renhao/y2.tped
+    // -k /home/zhi/Desktop/data_renhao/y2.hBN.kinf  --kinmatrix_emmax BN -o /home/zhi/Desktop/out
 
     this->runningFlag = false;
-  /*   LD:
+}
+
+void MainWindow::pca_ld_cmdButton_clicked()
+{
+
+    if (this->runningFlag)
+    {
+        QMessageBox::information(nullptr, "Error", "A project is running now.");
+        return;
+    }
+    if (this->fileReader->getGenotypeFile().isNull() || this->fileReader->getGenotypeFile().isEmpty())
+    {
+        QMessageBox::information(nullptr, "Error", "A genotype file is necessary!   ");
+        return;
+    }
+
+    this->runningFlag = true;
+    //    ui->pcaRunPushButton->setEnabled(false);
+    qApp->processEvents();
+
+    QString genotype = this->fileReader->getGenotypeFile();
+
+    QString map = this->fileReader->getMapFile();
+    QString out = this->workDirectory->getOutputDirectory();
+    QString name = this->workDirectory->getProjectName();
+    QString PCs =QString(ui->nPCsLineEdit->text());
+    QString Threads= QString(ui->nThreadsLineEdit->text());
+
+    QString PCAcmdlist;
+    PCAcmdlist.append("--pca ");
+    PCAcmdlist.append("--name "+name);
+    PCAcmdlist.append(" -g "+genotype+" --PCs "+PCs+" --threads "+Threads+" -o "+out);
+    emit runningMsgWidgetAppendText("PCA:");
+    emit runningMsgWidgetAppendText(PCAcmdlist);
+    emit runningMsgWidgetAppendText("");
+    emit runningMsgWidgetAppendText("");
+    emit runningMsgWidgetAppendText("");
+    emit runningMsgWidgetAppendText("");
+
+    QString LDcmdlist;
+    LDcmdlist.append("--LD ");
+    LDcmdlist.append("-g "+genotype+" --name "+name+" -o "+out+" --LDplot yes ");
+    if(ui->yesLDByFamRadioButton->isChecked())
+    {
+        LDcmdlist.append("--analysis yes");
+    }
+    else
+    {
+        LDcmdlist.append("--analysis no");
+    }
+    emit runningMsgWidgetAppendText("LD:");
+    emit runningMsgWidgetAppendText(LDcmdlist);
+
+    this->runningFlag = false;
+    /*   LD:
          single:
          --LD -g /home/zhi/Desktop/data/hapmap1.vcf --analysis no --name pro1 -o /home/zhi/Desktop/out --LDplot yes
      family:
      --LD -g
      /home/zhi/Desktop/LD_by_family测试数据/222_filter1_124.ped --analysis yes --name pro2 -o /home/zhi/Desktop/out --LDplot yes*/
- }
+}
 
- void MainWindow::annotationCmdButton_clicked()
- {
-     if (this->runningFlag)
-         {
-             QMessageBox::information(nullptr, "Error", "A project is running now.");
-             return;
-         }
-     QString cmdlist;
+void MainWindow::annotationCmdButton_clicked()
+{
+    if (this->runningFlag)
+    {
+        QMessageBox::information(nullptr, "Error", "A project is running now.");
+        return;
+    }
+    QString cmdlist;
 
-     QString name = workDirectory->getProjectName();
-     QString out = workDirectory->getOutputDirectory();
-     QString vcfFile = this->fileReader->getGenotypeFile();
-     QString pvalFile = ui->annoPvalLineEdit->text();    // p-value file(the first column is SNP_ID and the last column is p-value)
-     QString avinputFilePath = ui->avinFileLineEdit->text();//先读文件,若要step则后面会覆盖
-     QString refGeneFilePath = ui->refGeneFileLineEdit->text();
-     QString refSeqFilePath = ui->refSeqFileLineEdit->text();
-     QString snpPosFilePath = ui->snpPosFileLineEdit->text();//先读文件,若要step则后面会覆盖
-     QString funcAnnoRefFilePath = ui->funcAnnoRefFileLineEdit->text();
+    QString name = workDirectory->getProjectName();
+    QString out = workDirectory->getOutputDirectory();
+    QString vcfFile = this->fileReader->getGenotypeFile();
+    QString pvalFile = ui->annoPvalLineEdit->text();    // p-value file(the first column is SNP_ID and the last column is p-value)
+    QString avinputFilePath = ui->avinFileLineEdit->text();//先读文件,若要step则后面会覆盖
+    QString refGeneFilePath = ui->refGeneFileLineEdit->text();
+    QString refSeqFilePath = ui->refSeqFileLineEdit->text();
+    QString snpPosFilePath = ui->snpPosFileLineEdit->text();//先读文件,若要step则后面会覆盖
+    QString funcAnnoRefFilePath = ui->funcAnnoRefFileLineEdit->text();
 
-     //step cmd
-     if(checkoutExistence(pvalFile)&&checkoutExistence(vcfFile))//两个文件都有输入说明要做step
-     {
-         QString thBase = ui->annoThBaseLineEdit->text();    // Threshold base number.
-         QString thExpo = ui->annoThExpoLineEdit->text();    // Threshold exponent.
-         QFileInfo vcfFileInfo(vcfFile);
-         QString vcfFileAbPath = vcfFileInfo.absolutePath();
-         QString vcfFileBaseName = vcfFileInfo.baseName();
-         avinputFilePath = vcfFileAbPath + "/" + vcfFileBaseName + ".avinput";   // For input of structural annotaion
-         snpPosFilePath = vcfFileAbPath + "/" + vcfFileBaseName + "_SNPpos";     // For input of functional annotation
-         cmdlist.append("--step");
-         cmdlist.append(" --pvalue "+pvalFile+" -g "+vcfFile+" --thBase "+thBase+" --thExpo "+thExpo);
-     }
+    //step cmd
+    if(checkoutExistence(pvalFile)&&checkoutExistence(vcfFile))//两个文件都有输入说明要做step
+    {
+        QString thBase = ui->annoThBaseLineEdit->text();    // Threshold base number.
+        QString thExpo = ui->annoThExpoLineEdit->text();    // Threshold exponent.
+        QFileInfo vcfFileInfo(vcfFile);
+        QString vcfFileAbPath = vcfFileInfo.absolutePath();
+        QString vcfFileBaseName = vcfFileInfo.baseName();
+        avinputFilePath = vcfFileAbPath + "/" + vcfFileBaseName + ".avinput";   // For input of structural annotaion
+        snpPosFilePath = vcfFileAbPath + "/" + vcfFileBaseName + "_SNPpos";     // For input of functional annotation
+        cmdlist.append("--step");
+        cmdlist.append(" --pvalue "+pvalFile+" -g "+vcfFile+" --thBase "+thBase+" --thExpo "+thExpo);
+    }
 
 
-     qApp->processEvents();
-     //structural anno
-     if (avinputFilePath.isNull() || avinputFilePath.isEmpty())
-     {
-         emit setMsgBoxSig("Error", ".avinput file is necessary! ");
-         return;
-      //   throw -1;
-     }
-     if (refGeneFilePath.isNull() || refGeneFilePath.isEmpty())
-     {
-         emit setMsgBoxSig("Error", "Gff or Gtf file is necessary! ");
-         return;
-       //  throw -1;
-     }
-     if (refSeqFilePath.isNull() || refSeqFilePath.isEmpty())
-     {
-         emit setMsgBoxSig("Error", "Gene reference fasta file is necessary! ");
-         return;
+    qApp->processEvents();
+    //structural anno
+    if (avinputFilePath.isNull() || avinputFilePath.isEmpty())
+    {
+        emit setMsgBoxSig("Error", ".avinput file is necessary! ");
+        return;
+        //   throw -1;
+    }
+    if (refGeneFilePath.isNull() || refGeneFilePath.isEmpty())
+    {
+        emit setMsgBoxSig("Error", "Gff or Gtf file is necessary! ");
+        return;
+        //  throw -1;
+    }
+    if (refSeqFilePath.isNull() || refSeqFilePath.isEmpty())
+    {
+        emit setMsgBoxSig("Error", "Gene reference fasta file is necessary! ");
+        return;
         // throw -1;
-     }
-     this->runningFlag = true;
- //    ui->annotationRunButton->setEnabled(false);
+    }
+    this->runningFlag = true;
+    //    ui->annotationRunButton->setEnabled(false);
 
-     cmdlist.append(" --strucAnno");
-     cmdlist.append(" --name "+name+" --gff "+refGeneFilePath+" --fas "+refSeqFilePath+" --avin "+avinputFilePath
-                    +" -o "+out);
-     // --strucAnno --name pro2 --gff /home/zhi/Desktop/data_yzz/structure_annotation/Hdhv3.changeID.gff3
-     //--fas /home/zhi/Desktop/data_yzz/structure_annotation/Hdhv3.changeID.fa
-     //--avin /home/zhi/Desktop/data_yzz/structure_annotation/input_for_annovar1.txt -o /home/zhi/Desktop/out
-     QFileInfo fileInfo(refGeneFilePath);
-     QString baseName = fileInfo.baseName();
-     QString outFilePath = out + "/" + name + "_" + baseName;//此为structural anno的结果路径,其中两个结果作为fun anno的输入
-     QString varFuncFilePath = outFilePath+".variant_function";
-     QString exVarFuncFilePath = outFilePath+".exonic_variant_function";
+    cmdlist.append(" --strucAnno");
+    cmdlist.append(" --name "+name+" --gff "+refGeneFilePath+" --fas "+refSeqFilePath+" --avin "+avinputFilePath
+                   +" -o "+out);
+    // --strucAnno --name pro2 --gff /home/zhi/Desktop/data_yzz/structure_annotation/Hdhv3.changeID.gff3
+    //--fas /home/zhi/Desktop/data_yzz/structure_annotation/Hdhv3.changeID.fa
+    //--avin /home/zhi/Desktop/data_yzz/structure_annotation/input_for_annovar1.txt -o /home/zhi/Desktop/out
+    QFileInfo fileInfo(refGeneFilePath);
+    QString baseName = fileInfo.baseName();
+    QString outFilePath = out + "/" + name + "_" + baseName;//此为structural anno的结果路径,其中两个结果作为fun anno的输入
+    QString varFuncFilePath = outFilePath+".variant_function";
+    QString exVarFuncFilePath = outFilePath+".exonic_variant_function";
 
 
-     if ((!(snpPosFilePath.isNull()||snpPosFilePath.isEmpty())) &&
-                 (!(funcAnnoRefFilePath.isNull()||funcAnnoRefFilePath.isEmpty())) &&
-                 (!(varFuncFilePath.isNull()||varFuncFilePath.isNull())) &&
-                 (!(exVarFuncFilePath.isNull()||exVarFuncFilePath.isEmpty())))//如果有这4个文件说明要做functional anno
-     {
-       cmdlist.append(" --funcAnno");
-       cmdlist.append(" -o "+out+" --name "+name+" --snp_pos "+snpPosFilePath+" --funcAnnoRef "+funcAnnoRefFilePath
-                      +" --var "+varFuncFilePath+" --exvar "+exVarFuncFilePath);
-     }
- /*    --funcAnno -o /home/zhi/Desktop/out --name pro1
+    if ((!(snpPosFilePath.isNull()||snpPosFilePath.isEmpty())) &&
+            (!(funcAnnoRefFilePath.isNull()||funcAnnoRefFilePath.isEmpty())) &&
+            (!(varFuncFilePath.isNull()||varFuncFilePath.isNull())) &&
+            (!(exVarFuncFilePath.isNull()||exVarFuncFilePath.isEmpty())))//如果有这4个文件说明要做functional anno
+    {
+        cmdlist.append(" --funcAnno");
+        cmdlist.append(" -o "+out+" --name "+name+" --snp_pos "+snpPosFilePath+" --funcAnnoRef "+funcAnnoRefFilePath
+                       +" --var "+varFuncFilePath+" --exvar "+exVarFuncFilePath);
+    }
+    /*    --funcAnno -o /home/zhi/Desktop/out --name pro1
      --snp_pos /home/zhi/Desktop/data_renhao/fan_sig_pos
      --funcAnnoRef /home/zhi/Desktop/Func_anno_ref/Hdhv3_changeID_annotation.ensem.csv
      --var /home/zhi/Desktop/out/pro2_Hdhv3.variant_function
      --exvar /home/zhi/Desktop/out/pro2_Hdhv3.exonic_variant_function */
-     emit runningMsgWidgetAppendText(cmdlist);
-     this->runningFlag = false;
+    emit runningMsgWidgetAppendText(cmdlist);
+    this->runningFlag = false;
 
- }
+}
 
 /**
  * @brief MainWindow::on_pheFileToolButton_clicked
@@ -967,7 +967,7 @@ bool MainWindow::callGemmaGwas(QString phenotype, QString genotype, QString map,
     }
 
     if (kinship.isNull() && model == "LMM"
-       && this->gemmaParamWidget->isMakeRelatedMatAuto())
+            && this->gemmaParamWidget->isMakeRelatedMatAuto())
     {
         if (!gemma.makeKinship(binaryFile, genoFileBaseName+"_tmp", moreParam))
         {
@@ -2234,9 +2234,9 @@ void MainWindow::on_pcaRunPushButton_clicked()
             file.remove(binaryFile+".grm.N.bin");
 
             //            ui->eigenvalueLineEdit->setText(out+"/"+genoFileBaseName+".eigenval");
-//            emit setLineEditTextSig(ui->eigenvalueLineEdit, out+"/"+genoFileBaseName+".eigenval");
+            //            emit setLineEditTextSig(ui->eigenvalueLineEdit, out+"/"+genoFileBaseName+".eigenval");
             //            ui->eigenvectorLineEdit->setText(out+"/"+genoFileBaseName+".eigenvec");
-//            emit setLineEditTextSig(ui->eigenvectorLineEdit, out+"/"+genoFileBaseName+".eigenvec");
+            //            emit setLineEditTextSig(ui->eigenvectorLineEdit, out+"/"+genoFileBaseName+".eigenvec");
 
             QString eigenvalFile = out+"/"+genoFileBaseName+".eigenval";
             QString eigenvecFile = out+"/"+genoFileBaseName+".eigenvec";
@@ -2244,7 +2244,7 @@ void MainWindow::on_pcaRunPushButton_clicked()
                     this->workDirectory->getProjectName() + "_pca.png";
 
             if (!checkoutExistence(eigenvalFile) ||
-                !checkoutExistence(eigenvecFile))
+                    !checkoutExistence(eigenvecFile))
             {
                 throw -1;
             }
@@ -2881,11 +2881,11 @@ bool MainWindow::runExTool(QString tool, QStringList param)
     proc->waitForFinished(-1);
 
     bool ret = true;
-//    if (proc->exitCode() != Process::NormalExit)
-//    {
-//        emit runningMsgWidgetAppendText(proc->errorString());
-//        ret = false;
-//    }
+    //    if (proc->exitCode() != Process::NormalExit)
+    //    {
+    //        emit runningMsgWidgetAppendText(proc->errorString());
+    //        ret = false;
+    //    }
     proc->close();
     delete proc;
     proc = nullptr;
@@ -3004,12 +3004,12 @@ void MainWindow::structuralAnnotation(QString avinputFilePath, QString refGeneFi
             // annotation
             QString out = this->workDirectory->getOutputDirectory();
             QString name = this->workDirectory->getProjectName();
-//            QString outFile = out + "/" + name;
+            //            QString outFile = out + "/" + name;
             QString avinput = ui->avinFileLineEdit->text();
             QString refGeneDir = refGeneFileAbPath;
             QString refGenePrefix = refGeneFileBaseName;
             if (refGeneFilePath.contains("_refGene.txt") &&
-                refSeqFilePath.contains("_refGeneMrna.fa"))
+                    refSeqFilePath.contains("_refGeneMrna.fa"))
             {
                 QRegExp regExp("(.*)_refGene");
                 if (refGeneFileCompBaseName.indexOf(regExp) < 0)
@@ -3155,8 +3155,8 @@ void MainWindow::functionalAnnotation(QString snpPosFilePath, QString varFuncFil
         QString funcAnnoResult = out + "/" + name +"_func_anno";
         FuncAnnotator funcAnnotator;
 
-//        QRegExp ncbiFuncAnnoSuffixRegExp(".*.ncbi.csv");
-//        QRegExp ensemFuncAnnoSuffixRegExp(".*.ensem.csv");
+        //        QRegExp ncbiFuncAnnoSuffixRegExp(".*.ncbi.csv");
+        //        QRegExp ensemFuncAnnoSuffixRegExp(".*.ensem.csv");
 
         QFuture<void> fu = QtConcurrent::run(QThreadPool::globalInstance(), [&]()
         {   // Run functional annotation in another thread;
@@ -3248,9 +3248,9 @@ void MainWindow::on_annotationRunButton_clicked()
         QString exVarFuncFilePath = outFilePath+".exonic_variant_function";
 
         if (checkoutExistence(snpPosFilePath) &&
-            checkoutExistence(funcAnnoRefFilePath) &&
-            checkoutExistence(varFuncFilePath) &&
-            checkoutExistence(exVarFuncFilePath))
+                checkoutExistence(funcAnnoRefFilePath) &&
+                checkoutExistence(varFuncFilePath) &&
+                checkoutExistence(exVarFuncFilePath))
         {
             functionalAnnotation(snpPosFilePath, varFuncFilePath, exVarFuncFilePath, funcAnnoRefFilePath);
         }

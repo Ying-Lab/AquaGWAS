@@ -959,13 +959,18 @@ bool CommandLineParser::plotPca(QHash<QString, QString> args)
 
     QString out = args["out"];
     QString ProjectName = args["ProjectName"];
+    QString genotype = args["genoFile"];
+    QFileInfo genoFileInfo(genotype);
+    QString genoFileAbPath = genoFileInfo.absolutePath();
+    QString genoFileBaseName = genoFileInfo.baseName();
+
     //QString path = out;
 
     //QString outFile = this->workDirectory->getOutputDirectory() + "/" +
                       //this->workDirectory->getProjectName() + "_pca.png";
 
-    QString eigenvalFile = out + "/hapmap1.eigenval";
-    QString eigenvecFile = out + "/hapmap1.eigenvec";
+    QString eigenvalFile = out + "/"+ genoFileBaseName+".eigenval";
+    QString eigenvecFile = out + "/"+ genoFileBaseName+".eigenvec";
     //QString eigenvalFile = "/home/yingwang/yzz/test/out/hapmap1.eigenval";
     //QString eigenvecFile = "/home/yingwang/yzz/test/out/hapmap1.eigenvec";
 

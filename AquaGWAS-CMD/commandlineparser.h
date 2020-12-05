@@ -123,8 +123,8 @@ private:
     QString toolpath = QCoreApplication::applicationDirPath() + "/tools/";    // Realease
     QString scriptpath = QCoreApplication::applicationDirPath() + "/script/";
 #else
-    QString toolpath = "/home/zhi/Desktop/H_G_CMD_new/code/tools/";  //!!attention! 这里最后一个要加个"/"不然跑不起来
-    QString scriptpath = "/home/zhi/Desktop/H_G_CMD_new/code/script/";
+    QString toolpath = "/home/zhi/Desktop/AquaGWAS/AquaGWAS/AquaGWAS-CMD/tools/";  //!!attention! 这里最后一个要加个"/"不然跑不起来
+    QString scriptpath = "/home/zhi/Desktop/AquaGWAS/AquaGWAS/AquaGWAS-CMD/script/";
 #endif
     QProcess *proc;
 

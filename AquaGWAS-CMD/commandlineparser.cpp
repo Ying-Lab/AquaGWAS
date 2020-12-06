@@ -96,15 +96,15 @@ void CommandLineParser::initCmdLineOption()
     this->mindCmdOp = new QCommandLineOption(QStringList()
                             << "mind", "Missingness of individual", "mind", "");
     this->gemma_makeKinCmdOp = new QCommandLineOption(QStringList()
-                            << "makekin_gemma", "是否要生成亲缘矩阵1为是0为否 默认为1Make kinship auto(gemma)", "makekin", "1");
+                            << "makekin_gemma", "whether Make kinship auto,1:yes 2:no(gemma)", "makekin", "1");
     this->gemma_kinMatCmdOp = new QCommandLineOption(QStringList()
-                            << "kinmatrix_gemma", "Kinship file type:1.centered relatedness matrix 2.standardized relatedness matrix默认为1(gemma)", "kinmatrix", "1");
+                            << "kinmatrix_gemma", "Kinship file type:1.centered relatedness matrix 2.standardized relatedness matrix(gemma)", "kinmatrix", "1");
     this->gemma_lmmTestCmdOp = new QCommandLineOption(QStringList()
                             << "lmmtest", "choose LMM Test:1-4(gemma)", "lmmtest", "");
     this->gemma_bslmmModelCmdOp = new QCommandLineOption(QStringList()
                             << "bslmmmodel", "choose BSLMM model:1-3(gemma)", "bslmmmodel", "");
     this->gemma_famCompleCmdOp =  new QCommandLineOption(QStringList()
-                            << "famcomple", "是否要改造fam文件1为是0为否 默认为1 (gemma)", "famcomplete", "1"); //以上这部分主要是创建命令
+                            << "famcomple", "whether complete .fam file 1:yes 0:no (gemma)", "famcomplete", "1"); //以上这部分主要是创建命令
                                                                                              //类似于QCommandLineOption op1("a")
     this->LD_CmdOp = new QCommandLineOption(QStringList()
                        << "L" << "LD", "run LD");    //调用方式 -L或--LD 无参数
@@ -113,7 +113,7 @@ void CommandLineParser::initCmdLineOption()
     this->ProjectNameCmdOp = new QCommandLineOption(QStringList()
                  << "name" , "set project name","ProjectName",""); //调用方式 --name pro1
     this->LD_plot = new QCommandLineOption(QStringList()
-                 << "LDplot" , "LD分析完是否要画图","LD_plot",""); //调用方式 --LDplot yes/no
+                 << "LDplot" , "whether plot the LD analysis result(yes/no)","LD_plot",""); //调用方式 --LDplot yes/no
     // linrenhao
     this->emmax_makeKinCmdOp = new QCommandLineOption(QStringList()
                             <<  "makekin_emmax","Make kinship auto(emmax)", "makekin", "1");

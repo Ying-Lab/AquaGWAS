@@ -2,6 +2,8 @@
 ## Usage for GUI
 **There are five modules in AquaGWAS:** 
 1. PROJECT, 2. ASSOC, 3. MAN/QQ, 4. PCA/LD, 5. ANNOTATION
+Download AquaGWAS:[download link](https://github.com/gdengchao/AquaGWAS/releases/download/V1.0/AquaGWAS_V1.0.tar).
+Download test data:[download link](https://github.com/gdengchao/AquaGWAS/releases/download/V1.0/test_data.tar).
 
 + **PROJECT (Project setting)**   
     Select an appropriate output directory and set an easily distinguishable project name to which all AquaGWAS final output will be based.   

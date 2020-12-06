@@ -5,8 +5,8 @@ int main(int argc, char *argv[])
 {  
     QCoreApplication app(argc, argv);
 
-    app.setApplicationName("H_G_CMD");
-    app.setApplicationVersion("0.0.1");
+    app.setApplicationName("AquaGWAS-CMD");
+    app.setApplicationVersion("1.0");
 
     CommandLineParser parser;//创建对象的同时就利用构造函数将其初始化了，里面设置了各种命令选项
 

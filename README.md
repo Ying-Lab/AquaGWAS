@@ -58,8 +58,13 @@ After association analysis, the p-value file will automatically open, click the 
     (We offered "*_refGene.txt", "*refGeneMrna.fa" and funcation annotation databse file of some species)  
     ![ANNOTATION](https://github.com/gdengchao/AquaGWAS/blob/main/resource/anno.gif)  
 2. step  
-    the "avinput" and "snp_pos" file can be generated from a ".vcf"(open in Genotype) and a p-value file of association analysis(open automatically after association analysis). The threshold is used for filtering SNP and getting significant SNP.  
-    ![STEP](https://github.com/gdengchao/AquaGWAS/blob/main/resource/anno_step.gif)
+    The "avinput" and "snp_pos" file can be generated from a ".vcf"(open in Genotype) and a p-value file of association analysis(open automatically after association analysis). The threshold is used for filtering SNP and getting significant SNP.  
+    ![STEP](https://github.com/gdengchao/AquaGWAS/blob/main/resource/anno_step.gif)   
+3. auqatic database  
+    We have integrated 27 commonly used aquatic animal databases that can be used for gene annotation. The following links are available：    
+    Link1:  链接：https://pan.baidu.com/s/1s9swL0XTKsn9k9R2z_w7JQ 提取码：lsqe    
+    Link2:  [Google driver](https://drive.google.com/drive/folders/1w7uDlOZMj1O63FeFQ_KGc3vLBXJ_Sixk?usp=sharing)   
+    Link3:  [TeraCLOUD](https://futtsu.teracloud.jp/share/1121fd0207dc8717)  
 
 
 ## Usage for CMD
